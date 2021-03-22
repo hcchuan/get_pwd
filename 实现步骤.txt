@@ -1,0 +1,71 @@
+--------------------------------------参考
+#python-暴力破解（突破验证码）
+https://blog.csdn.net/weixin_43727482/article/details/106744109
+https://blog.csdn.net/qq_39208536/article/details/80755400
+
+--------------------------------------Windows 下为python安装tesserocr库
+-------------------先安装tesseract（在 Windows 下，首先需要下载 tesseract，它为 tesserocr 提供了支持）
+#下载tesseract
+tesseract下载页面（根据自己的系统选择64位或32位）https://digi.bib.uni-mannheim.de/tesseract
+【提醒】下载相当慢，建议到海川百度云搜索“tesseract”，找到对应版本下载
+
+#下载完成后安装【安装路径不能有中文和空格】，安装完成后把安装目录（如D:\soft_installed\Tesseract-OCR）
+加入到系统环境变量Path中
+
+#将D:\soft_installed\Tesseract-OCR\tessdata文件夹拷贝到“D:\soft_installed\Anaconda3”目录下
+【注意】是复制整个文件夹！
+
+#将D:\soft_installed\Tesseract-OCR\tessdata文件夹里的内容拷贝到“D:\soft_installed\Tesseract-OCR”目录下
+【注意】是复制“tessdata”文件夹下面的内容，不是复制整个文件夹！
+
+
+#把安装目录下的tessdata文件夹整个复制到python安装目录下，如D:\soft_installed\Anaconda3\Scripts下，
+把D:\soft_installed\Anaconda3\Scripts和D:\soft_installed\Anaconda3\Scripts\tessdata加入到系统环境变量Path中
+
+#验证安装是否成功：
+cmd下执行命令 tesseract --version
+
+-------------------安装tesserocr
+cmd下执行命令（tesserocr和pillow可以一起安装，也可单独安装） 
+pip3 install tesserocr pillow
+
+#如果安装报错，则在 https://github.com/simonflueckiger/tesserocr-windows_build/releases 下载对应版本，如tesserocr-2.4.0-cp36-cp36m-win_amd64.whl
+（或在海川百度云搜索“tesserocr-2.4.0-cp36-cp36m-win_amd64.whl”下载），再执行以下命令tesserocr安装（注意修改.whl放置路径要修改成自己的）
+pip3 install D:\soft\tesseract\tesserocr-2.4.0-cp36-cp36m-win_amd64.whl
+
+返回Successfully installed...说明安装成功了
+
+#再单独安装pillow
+pip3 install pillow
+
+#如果安装错误可卸载重装
+pip3 uninstall tesserocr pillow
+-------------------参考
+https://blog.csdn.net/zoujin6649/article/details/82697031
+https://cuiqingcai.com/5189.html
+https://blog.csdn.net/u014179267/article/details/80908790
+
+--------------------------------------运行python脚本报错：Failed to init API, possibly an invalid tessdata path
+将之前安装的D:\soft_installed\Tesseract-OCR目录下面的“tessdata”文件夹里的内容拷贝到“D:\soft_installed\Tesseract-OCR”目录下。
+【注意】是复制“tessdata”文件夹下面的内容，不是复制整个文件夹！
+
+--------------------------------------试用结果
+使用tesserocr无法识别，加装了pytesseract库，使用正常，但只能正确识别没有干扰点的图片
+----pytesseract的使用参考 https://www.jb51.net/article/157487.htm
+----安装pip install pytesseract
+----demo代码
+import pytesseract
+from PIL import Image
+import requests
+import re
+ 
+#使用pytesseract类库进行图片识别
+#python I:\work\project\python\get_pwd\read_img.py
+
+im=Image.open("images/2.jpg")
+print(pytesseract.image_to_string(im))
+im1=Image.open("images/3.png")
+print(pytesseract.image_to_string(im1))
+
+--------------------------------------我的git项目地址
+https://github.com/hcchuan/get_pwd
