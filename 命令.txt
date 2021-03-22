@@ -1,0 +1,1 @@
+I: & cd I:\work\project\python\get_pwd & python get_pwd.py
